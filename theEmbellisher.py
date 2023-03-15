@@ -6,6 +6,8 @@ import csv
 load_dotenv()
 openAiKey = os.getenv("OPENAI_API_KEY")
 print(openAiKey)
+os.remove("results.csv")
+
 
 # read a file on the same directory line by line and print it out
 def processFile():
@@ -13,15 +15,11 @@ def processFile():
         file = csv.reader(csv_file, delimiter=',', quotechar='"')
         # skip the first line
         next(file)
-        i = 0
         for line in file:
             item = line
             print(item[3])
             result = callOpenAI(item[3], item[0])
             writeToCSVFile(item[0], item[3], result)
-            if (i > 1):
-                break
-            i+=1
 
 def getGPTEmbellishment(content):
     return content.split("\n")[-1]
@@ -31,7 +29,6 @@ def getGPTKeywords(content):
     
 # write response to csv file with the date and keywords
 def writeToCSVFile(date, keywords, response):
-    os.remove("results.csv")
     with open("results.csv", "a+") as csv_file:
         file = csv.writer(csv_file, delimiter=',', quotechar='"')
         file.writerow([date, "\n".join(getGPTKeywords(response["choices"][0]["message"]["content"])), getGPTEmbellishment(response["choices"][0]["message"]["content"])])
