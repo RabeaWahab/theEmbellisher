@@ -49,7 +49,7 @@ def callOpenAI(text: str, date: str):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[{
-            "content": """Sort the following keywords based on their societal impact
+            "content": """You are a business analyst, sort the following keywords based on their societal impact
                 choose the top 5 keywords that you think are the most impactful if they are more than 5 and
                 use them in a summary related to the day ({date}): {keywords},
                 then output the results as JSON with the following format: {{"top5": string,"summary": string}}
