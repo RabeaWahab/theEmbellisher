@@ -7,7 +7,6 @@ import json
 
 load_dotenv()
 openAiKey = os.getenv("OPENAI_API_KEY")
-print(openAiKey)
 
 try:
     os.remove("results.csv")
@@ -27,12 +26,6 @@ def processFile():
             result = callOpenAI(item[3], item[0])
             print(result)
             writeToCSVFile(item[0], result)
-
-# def getGPTEmbellishment(content):
-#     return content.split("\n")[-1]
-
-# def getGPTKeywords(content):
-#     return content.split("\n")[:-1]
     
 # write response to csv file with the date and keywords
 def writeToCSVFile(date, response):
