@@ -15,6 +15,7 @@ except FileNotFoundError:
 
 
 # read a file on the same directory line by line and print it out
+# this is a  comment
 def processFile():
     with open("keywords.csv") as csv_file:
         file = csv.reader(csv_file, delimiter=',', quotechar='"')
